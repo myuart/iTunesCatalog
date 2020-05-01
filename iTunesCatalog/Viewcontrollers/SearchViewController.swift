@@ -39,6 +39,7 @@ class SearchViewController: UIViewController {
                 self.sections.sort { lhs, rhs in lhs.sectionTitle < rhs.sectionTitle }
               case .failure(let error):
                 self.searchedData = []
+                self.sections = [SectionEntry<String, SearchResult>]()
                 print(error.localizedDescription)
             }
             DispatchQueue.main.async() {
