@@ -8,8 +8,6 @@
 
 import UIKit
 
-let favoriteCache = NSCache<AnyObject, AnyObject>()
-
 class EntryTableViewCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var genreLabel: UILabel!
@@ -25,15 +23,16 @@ class EntryTableViewCell: UITableViewCell {
     }
 
     @IBAction func favoriteTapped(_ sender: UIButton) {
-        guard let urlString = linkLabel.text else { return }
+        guard let name = nameLabel.text, let urlString = linkLabel.text else { return }
+        let key = name + "_" + urlString
         
-        if let _ = favoriteCache.object(forKey: urlString as AnyObject) {
-            favoriteCache.removeObject(forKey: urlString as AnyObject)
+        if let _ = UserDefaults.standard.string(forKey: key) {
             sender.setImage(UIImage(named: "unfavorite"), for: .normal)
+            UserDefaults.standard.removeObject(forKey: key)
         }
         else {
-            favoriteCache.setObject(urlString as AnyObject, forKey: urlString as AnyObject)
             sender.setImage(UIImage(named: "favorite"), for: .normal)
+            UserDefaults.standard.set(key, forKey:key)
         }
     }
     

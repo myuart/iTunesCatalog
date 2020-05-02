@@ -5,7 +5,7 @@ This app lets users enter a search term then calls the iTunes API to fetch from 
 1. Among all the media types, "audiobook" returns a json format different from the others. Therefore, Codable cannot be used, instead specific parsing is implemented.
 2. The newest Swift 5 Result Type is used in asynchronous API calls in this app. An URLSession extension is added to achieve this.
 3. An extension of UIImageView is implemented to make an asynchronous urlSession.dataTask call to download the artwork image. NSCache is used to cache the downloaded image, so no repeating downloads.
-4. The users can make a search result favorite. Each favorite is saved in the cache. 
+4. The users can make a search result favorite. Each favorite is saved in the UserDefaults to make it persist. This is not ideal, for now just assuming only a small number of favorites will be saved.  
 5. Tapping on the url link of a search result (entry) will bring out Safari to display the details of the selected entry in iTunes. For some reason, Safari cannot display the "audiobook" and "podcast" url.
 
 ## License

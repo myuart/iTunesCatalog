@@ -84,7 +84,8 @@ extension SearchViewController: UITableViewDataSource {
         cell.iconView.loadThumbnail(urlSting: entry.artworkUrl)
         
         /// set favorite image accordingly
-        if let _ = favoriteCache.object(forKey: entry.url as AnyObject) {
+        let key = entry.name + "_" + entry.url
+        if let _ = UserDefaults.standard.string(forKey: key) {
             cell.favoriteButton.setImage(UIImage(named: "favorite"), for: .normal)
         }
         else {
